@@ -69,17 +69,6 @@ export default function Newperson({
             onChange={changeborn}
             fullWidth
           />
-
-          <TextField
-            type="text"
-            multiline
-            rowsMax={4}
-            label="About"
-            placeholder="Tell about this person."
-            variant="outlined"
-            fullWidth
-          />
-
           <Button type="submit" variant="contained" fullWidth>
             Save
           </Button>

@@ -8,7 +8,8 @@ import {
   Button,
 } from "@material-ui/core";
 
-export default function Person({ value }) {
+
+export default function Person({ value,edit }) {
   return (
     <>
       <Card style={{ margin: "1rem", padding: "1rem" }}>
@@ -18,7 +19,7 @@ export default function Person({ value }) {
           <Typography variant="body2">{value.about}</Typography>
         </CardContent>
         <CardActions>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={edit}>
             Edit
           </Button>
           <Button variant="contained" color="secondary">

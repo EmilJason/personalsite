@@ -6,6 +6,7 @@ import axios from 'axios';
 import Navbar from "./components/Navbar";
 import Newperson from "./components/Newperson";
 import PersonLists from "./components/PersonLists";
+import EditPerson from './components/EditPerson';
 
 function App() {
   let [name, setname] = useState(null);
@@ -27,6 +28,9 @@ function App() {
     console.log(about);
 
   };
+  const renderEditForm = () =>{
+    return <EditPerson />
+  }
   
   let loadData = () =>{
     axios.get('http://localhost:1995/person')
@@ -34,9 +38,14 @@ function App() {
   }
 
   let save = (e) => {
+    e.preventDefault();
     try {
-      e.preventDefaults();
-      axios.post(`http://localhost:1995/person/new`,{name, born, about})
+      let setPerson = {
+        name: name,
+        born: born,
+        about: about
+      }
+      axios.post(`http://localhost:1995/person/new`,setPerson)
       .then(response=>{
         console.log(response.data);
       });
@@ -45,6 +54,9 @@ function App() {
     } catch (error) {
       console.log(error.message)
     }
+    setname(null);
+    setabout(null);
+    setborn(null);
   };
 
   useEffect(() => {
@@ -55,7 +67,7 @@ function App() {
     <>
       <Navbar records={list} />
       <Grid container>
-        <Grid item md={6} xs={12}>
+        <Grid item md={4} xs={12}>
           
         <Newperson
           name={name}
@@ -67,8 +79,8 @@ function App() {
           save={save}
           />
         </Grid>
-        <Grid item md={6} xs={12}>
-        <PersonLists value={list} />
+        <Grid item md={8} xs={12}>
+        <PersonLists value={list} edit={renderEditForm}/>
         </Grid>
       </Grid>
     </>
